@@ -8,11 +8,21 @@ public class ListController
 
     public ListController() {
         lister = new RecursiveLister();
+        launcher = new FileChooserLauncher();
     }
 
     public ArrayList<SearchResult> launchSearch()
     {
         File selectedFile = launcher.chooseFile();
-        return lister.search(selectedFile);
+        if (selectedFile != null) {
+            return lister.search(selectedFile);
+        }
+        else {
+            return null;
+        }
+    }
+
+    public void reset() {
+        launcher.resetChooser();
     }
 }

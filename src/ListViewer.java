@@ -1,7 +1,15 @@
-import com.sun.security.auth.login.ConfigFile;
-
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+
+//See about making JTextArea output look any cleaner
+//See about making the GUI prettier
+//Do code review to see if it can be more OOP/if there are any errors
+//Final test runs
+//JUnit
+//Javadoc
+//UML
 
 public class ListViewer
 {
@@ -13,6 +21,10 @@ public class ListViewer
 
     public void start() {
         controller = new ListController();
+        generateFrame();
+        setUpStartListener();
+        setUpResetListener();
+        setUpQuitListener();
     }
 
     public void generateFrame() {
@@ -80,5 +92,81 @@ public class ListViewer
         frame.setVisible(true);
     }
 
-    public void
+    private void reset()
+    {
+        controlPnl.reset();
+        fileDisplayPnl.reset();
+        controller.reset();
+    }
+
+    private boolean displaySearchResult(ArrayList<SearchResult> results)
+    {
+        fileDisplayPnl.getFileTA().setText("");
+
+        if(results != null) {
+            fileDisplayPnl.getFileTA().append("Directory contains:\n");
+
+            for (SearchResult r : results) {
+                boolean isFile = r.isFile();
+                String absolutePath = r.getAbsolutePath();
+
+                if (isFile) {
+                    fileDisplayPnl.getFileTA().append("Found a file: " + absolutePath + "\n");
+                } else {
+                    fileDisplayPnl.getFileTA().append("Found a directory: " + absolutePath + "\n");
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void setUpStartListener() {
+        controlPnl.addStartActionListener((ActionEvent ae) ->
+        {
+            ArrayList<SearchResult> results = controller.launchSearch();
+            boolean displayed = displaySearchResult(results);
+
+            if (displayed) {
+                controlPnl.getStartBtn().setEnabled(false);
+                controlPnl.getResetBtn().setEnabled(true);
+            }
+        });
+    }
+
+    public void setUpResetListener()
+    {
+        controlPnl.addResetActionListener((ActionEvent ae) ->
+        {
+            //This int tracks whether the user confirmed or denied they wanted to reset the program
+            int selection = JOptionPane.showConfirmDialog(null, "Are you sure you want to reset the program?", "Reset", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            //This algorithm determines whether to reset the program based on the user's input
+            if(selection == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(null, "Resetting the program...");
+                reset();
+            } else
+            {
+                JOptionPane.showMessageDialog(null, "The program will stay as-is.");
+            }
+        });
+    }
+
+    public void setUpQuitListener()
+    {
+        controlPnl.addQuitActionListener((ActionEvent ae) -> {
+            //This int tracks whether the user confirmed or denied they wanted to quit the program
+            int selection = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit? You can press Reset to reset the program.", "Quit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            //This algorithm determines whether to quit the program based on the user's input
+            if(selection == JOptionPane.YES_OPTION) {
+                JOptionPane.showMessageDialog(null, "Quitting the program...");
+                System.exit(0);
+            } else
+            {
+                JOptionPane.showMessageDialog(null, "The program will remain open.");
+            }
+        });
+    }
 }

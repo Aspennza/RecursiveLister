@@ -13,19 +13,16 @@ public class FileChooserLauncher
     //This JFileChooser is used to prompt the user to pick a directory
     private JFileChooser chooser;
 
-    //This constructor initializes the chooser and sets its default directory
-    public FileChooserLauncher() {
-        chooser = new JFileChooser();
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        File workingDirectory = new File(System.getProperty("user.dir"));
-        chooser.setCurrentDirectory(workingDirectory);
-    }
-
     /**
      * This method prompts the user to choose a file, returning the File if they pick one and returning null if they don't
      * @return a File representing the user's chosen file
      */
     public File chooseFile() {
+        chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        File workingDirectory = new File(System.getProperty("user.dir"));
+        chooser.setCurrentDirectory(workingDirectory);
+
         if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             return chooser.getSelectedFile();
         }
@@ -37,6 +34,7 @@ public class FileChooserLauncher
      */
     public void resetChooser() {
         chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
     }
 

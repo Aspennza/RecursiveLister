@@ -26,6 +26,12 @@ public class ControlPnl extends JPanel
         add(quitBtn);
     }
 
+    public void reset()
+    {
+        startBtn.setEnabled(true);
+        resetBtn.setEnabled(false);
+    }
+
     public void addStartActionListener(ActionListener listener) {
         startBtn.addActionListener(listener);
     }

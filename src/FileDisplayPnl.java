@@ -24,6 +24,10 @@ public class FileDisplayPnl extends JPanel
         add(scroller, BorderLayout.CENTER);
     }
 
+    public void reset() {
+        fileTA.setText("");
+    }
+
     public JLabel getFileLbl() {
         return fileLbl;
     }
