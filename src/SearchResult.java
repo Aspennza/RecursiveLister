@@ -10,6 +10,15 @@ public class SearchResult
         this.absolutePath = absolutePath;
     }
 
+    public String display()
+    {
+        if (isFile) {
+            return "Found a file:" + absolutePath;
+        } else {
+            return "Found a directory: " + absolutePath;
+        }
+    }
+
     public String getAbsolutePath() {
         return absolutePath;
     }

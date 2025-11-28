@@ -36,6 +36,11 @@ public class FileDisplayPnl extends JPanel
         add(scroller, BorderLayout.CENTER);
     }
 
+    public void showResults(String results)
+    {
+        fileTA.append(results);
+    }
+
     /**
      * This method resets the panel to its original state
      */

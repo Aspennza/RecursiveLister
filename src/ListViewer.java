@@ -3,11 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-//Add a joptionpane welcoming users to the program
-//Do code review to see if it can be more OOP/if there are any errors
-//Final test runs
 //JUnit
-//Javadoc (javadoc already complete for controlpnl, filechooserlauncher, filedisplaypnl, and titlepnl)
+//Javadoc (javadoc already MOSTLY complete for controlpnl, filechooserlauncher, filedisplaypnl, and titlepnl)
 //UML
 
 public class ListViewer
@@ -24,6 +21,7 @@ public class ListViewer
         setUpStartListener();
         setUpResetListener();
         setUpQuitListener();
+        JOptionPane.showMessageDialog(null, "Welcome to the Recursive File Lister! Begin by pressing Start and selecting a directory whose contents you want to list.");
     }
 
     public void generateFrame() {
@@ -98,76 +96,81 @@ public class ListViewer
         controller.reset();
     }
 
-    private boolean displaySearchResult(ArrayList<SearchResult> results)
+    private String formatSearchResult(ArrayList<SearchResult> results)
     {
-        fileDisplayPnl.getFileTA().setText("");
+        //A StringBuilder is used here to avoid repeated String creation in the for loop
+        StringBuilder text = new StringBuilder();
 
         if(results != null) {
-            fileDisplayPnl.getFileTA().append("Directory contains:\n");
+            text.append(("Directory contains:\n"));
 
             for (SearchResult r : results) {
-                boolean isFile = r.isFile();
-                String absolutePath = r.getAbsolutePath();
-
-                if (isFile) {
-                    fileDisplayPnl.getFileTA().append("Found a file: " + absolutePath + "\n");
-                } else {
-                    fileDisplayPnl.getFileTA().append("\nFound a directory: " + absolutePath + "\n");
-                }
+                text.append(r.display()).append("\n\n");
             }
+        }
+        return text.toString();
+    }
+
+    private boolean displaySearchResult(ArrayList<SearchResult> results)
+    {
+        String formatted = formatSearchResult(results);
+
+        if(!formatted.isEmpty()) {
+            fileDisplayPnl.showResults(formatted);
             return true;
-        } else {
-            return false;
+        }
+        return false;
+    }
+
+    private void handleStart() {
+        ArrayList<SearchResult> results = controller.launchSearch();
+        boolean displayed = displaySearchResult(results);
+
+        if (displayed) {
+            controlPnl.deactivateStartBtn();
+            controlPnl.activateResetBtn();
+        }
+    }
+
+    private void handleReset() {
+        //This int tracks whether the user confirmed or denied they wanted to reset the program
+        int selection = JOptionPane.showConfirmDialog(null, "Are you sure you want to reset the program?", "Reset", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        //This algorithm determines whether to reset the program based on the user's input
+        if(selection == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "Resetting the program...");
+            reset();
+        } else
+        {
+            JOptionPane.showMessageDialog(null, "The program will stay as-is.");
+        }
+    }
+
+    private void handleQuit() {
+        //This int tracks whether the user confirmed or denied they wanted to quit the program
+        int selection = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit? You can press Reset to reset the program.", "Quit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        //This algorithm determines whether to quit the program based on the user's input
+        if(selection == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "Quitting the program...");
+            System.exit(0);
+        } else
+        {
+            JOptionPane.showMessageDialog(null, "The program will remain open.");
         }
     }
 
     public void setUpStartListener() {
-        controlPnl.addStartActionListener((ActionEvent ae) ->
-        {
-            ArrayList<SearchResult> results = controller.launchSearch();
-            boolean displayed = displaySearchResult(results);
-
-            if (displayed) {
-                controlPnl.getStartBtn().setEnabled(false);
-                controlPnl.getResetBtn().setEnabled(true);
-                controlPnl.styleStartBtn();
-                controlPnl.styleResetBtn();
-            }
-        });
+        controlPnl.addStartActionListener((ActionEvent ae) -> handleStart());
     }
 
     public void setUpResetListener()
     {
-        controlPnl.addResetActionListener((ActionEvent ae) ->
-        {
-            //This int tracks whether the user confirmed or denied they wanted to reset the program
-            int selection = JOptionPane.showConfirmDialog(null, "Are you sure you want to reset the program?", "Reset", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-
-            //This algorithm determines whether to reset the program based on the user's input
-            if(selection == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(null, "Resetting the program...");
-                reset();
-            } else
-            {
-                JOptionPane.showMessageDialog(null, "The program will stay as-is.");
-            }
-        });
+        controlPnl.addResetActionListener((ActionEvent ae) -> handleReset());
     }
 
     public void setUpQuitListener()
     {
-        controlPnl.addQuitActionListener((ActionEvent ae) -> {
-            //This int tracks whether the user confirmed or denied they wanted to quit the program
-            int selection = JOptionPane.showConfirmDialog(null, "Are you sure you want to quit? You can press Reset to reset the program.", "Quit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-
-            //This algorithm determines whether to quit the program based on the user's input
-            if(selection == JOptionPane.YES_OPTION) {
-                JOptionPane.showMessageDialog(null, "Quitting the program...");
-                System.exit(0);
-            } else
-            {
-                JOptionPane.showMessageDialog(null, "The program will remain open.");
-            }
-        });
+        controlPnl.addQuitActionListener((ActionEvent ae) -> handleQuit());
     }
 }

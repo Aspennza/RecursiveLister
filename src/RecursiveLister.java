@@ -7,7 +7,13 @@ public class RecursiveLister
     public ArrayList<SearchResult> search(File searchFile)
     {
         ArrayList<SearchResult> result = new ArrayList<>();
-        File[] dList = searchFile.listFiles();
+        recursiveFileSearch(searchFile, result);
+        return result;
+    }
+
+    private void recursiveFileSearch(File file, ArrayList<SearchResult> result)
+    {
+        File[] dList = file.listFiles();
 
         if(dList != null) {
             for (File f : dList) {
@@ -18,10 +24,9 @@ public class RecursiveLister
                 } else if (f.isDirectory() && !f.isHidden()) {
                     //print something to the gui and recursive call
                     result.add(new SearchResult(false, f.getAbsolutePath()));
-                    result.addAll(search(f));
+                    recursiveFileSearch(f, result);
                 }
             }
         }
-        return result;
     }
 }

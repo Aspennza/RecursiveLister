@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 public class ListController
 {
-    private RecursiveLister lister;
-    private FileChooserLauncher launcher;
+    private final RecursiveLister lister;
+    private final FileChooserLauncher launcher;
 
     public ListController() {
         lister = new RecursiveLister();

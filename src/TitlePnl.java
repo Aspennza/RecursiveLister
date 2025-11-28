@@ -12,17 +12,21 @@ import java.awt.*;
 public class TitlePnl extends JPanel
 {
     //A JLabel for the title of the program
-    JLabel titleLbl;
+    private JLabel titleLbl;
 
     //A Font for the titleLbl
-    Font titleFont;
+    private Font titleFont;
+
+    private static final Color BACKGROUND_COLOR = new Color(34, 39, 80);
+
+    private static final Color TEXT_COLOR = new Color(255, 255, 255);
 
     //This constructor initializes the label and font and styles the panel
     public TitlePnl() {
-        titleLbl = new JLabel("Recursive File Lister");
-        setBackground(new Color(34, 39, 80));
-        titleLbl.setForeground(new Color(255, 255, 255));
+        setBackground(BACKGROUND_COLOR);
         setBorder(new CompoundBorder(new EtchedBorder(), new EmptyBorder(10, 10, 10, 10)));
+        titleLbl = new JLabel("Recursive File Lister");
+        titleLbl.setForeground(TEXT_COLOR);
         titleFont = new Font("Serif", Font.BOLD, 36);
         titleLbl.setFont(titleFont);
         add(titleLbl);
