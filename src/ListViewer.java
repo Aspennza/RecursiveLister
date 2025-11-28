@@ -3,12 +3,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-//See about making JTextArea output look any cleaner
-//See about making the GUI prettier
+//Add a joptionpane welcoming users to the program
 //Do code review to see if it can be more OOP/if there are any errors
 //Final test runs
 //JUnit
-//Javadoc
+//Javadoc (javadoc already complete for controlpnl, filechooserlauncher, filedisplaypnl, and titlepnl)
 //UML
 
 public class ListViewer
@@ -113,7 +112,7 @@ public class ListViewer
                 if (isFile) {
                     fileDisplayPnl.getFileTA().append("Found a file: " + absolutePath + "\n");
                 } else {
-                    fileDisplayPnl.getFileTA().append("Found a directory: " + absolutePath + "\n");
+                    fileDisplayPnl.getFileTA().append("\nFound a directory: " + absolutePath + "\n");
                 }
             }
             return true;
@@ -131,6 +130,8 @@ public class ListViewer
             if (displayed) {
                 controlPnl.getStartBtn().setEnabled(false);
                 controlPnl.getResetBtn().setEnabled(true);
+                controlPnl.styleStartBtn();
+                controlPnl.styleResetBtn();
             }
         });
     }

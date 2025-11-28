@@ -4,6 +4,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 
+/**
+ * Allows the creation of pre-designed JPanels with a JLabel
+ * representing the title of the program.
+ * @author Zoe Aspenns aspennza@mail.uc.edu
+ */
 public class TitlePnl extends JPanel
 {
     //A JLabel for the title of the program
@@ -12,9 +17,11 @@ public class TitlePnl extends JPanel
     //A Font for the titleLbl
     Font titleFont;
 
-    //This constructor initializes the label and font
+    //This constructor initializes the label and font and styles the panel
     public TitlePnl() {
         titleLbl = new JLabel("Recursive File Lister");
+        setBackground(new Color(34, 39, 80));
+        titleLbl.setForeground(new Color(255, 255, 255));
         setBorder(new CompoundBorder(new EtchedBorder(), new EmptyBorder(10, 10, 10, 10)));
         titleFont = new Font("Serif", Font.BOLD, 36);
         titleLbl.setFont(titleFont);
