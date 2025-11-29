@@ -5,8 +5,13 @@ import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests the basic functionality of the methods in the FileDisplayPnl class.
+ * @author Zoe Aspenns aspennza@mail.uc.edu
+ */
 class FileDisplayPnlTest {
 
+    //A FileDisplayPnl object for testing the methods
     FileDisplayPnl pnl;
 
     @BeforeEach

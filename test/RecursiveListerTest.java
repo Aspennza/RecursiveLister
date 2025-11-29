@@ -6,8 +6,13 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests the basic functionality of the methods in the RecursiveLister class.
+ * @author Zoe Aspenns aspennza@mail.uc.edu
+ */
 class RecursiveListerTest {
 
+    //A RecursiveLister object for testing the methods
     RecursiveLister lister;
 
     @BeforeEach

@@ -20,11 +20,18 @@ public class FileChooserLauncher
     //This JFileChooser is used to prompt the user to pick a directory
     private JFileChooser chooser;
 
+    /**
+     * This method creates the JFileChooser and configures it by calling configureChooser
+     */
     private void setUpChooser() {
         chooser = new JFileChooser();
         configureChooser(chooser);
     }
 
+    /**
+     * This method configures the JFileChooser's selection mode and default directory
+     * @param chooser the JFileChooser to configure
+     */
     public void configureChooser(JFileChooser chooser) {
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         File workingDirectory = new File(System.getProperty("user.dir"));

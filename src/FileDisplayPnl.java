@@ -36,6 +36,10 @@ public class FileDisplayPnl extends JPanel
         add(scroller, BorderLayout.CENTER);
     }
 
+    /**
+     * This method appends input String data to the fileTA
+     * @param results the String data to append
+     */
     public void showResults(String results)
     {
         fileTA.append(results);

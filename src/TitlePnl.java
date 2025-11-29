@@ -17,8 +17,10 @@ public class TitlePnl extends JPanel
     //A Font for the titleLbl
     private Font titleFont;
 
+    //The background color of the TitlePnl
     private static final Color BACKGROUND_COLOR = new Color(34, 39, 80);
 
+    //The text color of the titleLbl
     private static final Color TEXT_COLOR = new Color(255, 255, 255);
 
     //This constructor initializes the label and font and styles the panel

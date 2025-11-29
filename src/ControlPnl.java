@@ -32,12 +32,15 @@ public class ControlPnl extends JPanel
 
         controlPnlFont = new Font("SansSerif", Font.BOLD, 14);
 
+        //initializing the start button
         startBtn = new JButton("Start");
         styleBtn(startBtn, new Color(61, 109, 159), true);
 
+        //initializing the reset button
         resetBtn = new JButton("Reset");
         styleBtn(resetBtn, new Color(74, 74, 74), false);
 
+        //initializing the quit button
         quitBtn = new JButton("Quit");
         styleBtn(quitBtn, new Color(61, 109, 159), true);
 
@@ -46,6 +49,13 @@ public class ControlPnl extends JPanel
         add(quitBtn);
     }
 
+    /**
+     * This method handles most of the code for styling the buttons' font,
+     * background color, text color, and enabled/disabled status.
+     * @param btn the JButton to style
+     * @param bg the background color of the button
+     * @param enabled the enabled/disabled status of the button
+     */
     private void styleBtn(JButton btn, Color bg, boolean enabled) {
         btn.setFont(controlPnlFont);
         btn.setBackground(bg);
@@ -54,16 +64,15 @@ public class ControlPnl extends JPanel
     }
 
     /**
-     * This method allows the ListViewer to change the color of the reset button when it is activated
+     * This method allows the ListViewer to activate the reset button and change its color
      */
     public void activateResetBtn() {
         resetBtn.setEnabled(true);
         resetBtn.setBackground(new Color(61, 109, 159));
     }
 
-
     /**
-     * This method allows the ListViewer to change the color of the start button when it is deactivated
+     * This method allows the ListViewer to deactivate the start button and change its color
      */
     public void deactivateStartBtn() {
         startBtn.setEnabled(false);
