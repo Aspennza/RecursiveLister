@@ -8,14 +8,14 @@ import java.util.Objects;
 public class SearchResult
 {
     //This boolean stores the object's status as a file or directory
-    private final boolean isFile;
+    private final boolean IS_FILE;
 
     //This String stores the absolute path to the file/directory
-    private final String absolutePath;
+    private final String ABSOLUTE_PATH;
 
-    public SearchResult(boolean isFile, String absolutePath) {
-        this.isFile = isFile;
-        this.absolutePath = absolutePath;
+    public SearchResult(boolean IS_FILE, String ABSOLUTE_PATH) {
+        this.IS_FILE = IS_FILE;
+        this.ABSOLUTE_PATH = ABSOLUTE_PATH;
     }
 
     /**
@@ -26,26 +26,26 @@ public class SearchResult
     public String display()
     {
         //This algorithm determines whether the SearchResult is a file or a directory
-        if (isFile) {
-            return "Found a file: " + absolutePath;
+        if (IS_FILE) {
+            return "Found a file: " + ABSOLUTE_PATH;
         } else {
-            return "Found a directory: " + absolutePath;
+            return "Found a directory: " + ABSOLUTE_PATH;
         }
     }
 
-    public String getAbsolutePath() {
-        return absolutePath;
+    public String getABSOLUTE_PATH() {
+        return ABSOLUTE_PATH;
     }
 
     public boolean isFile() {
-        return isFile;
+        return IS_FILE;
     }
 
     @Override
     public String toString() {
         return "SearchResult{" +
-                "isFile=" + isFile +
-                ", absolutePath='" + absolutePath + '\'' +
+                "IS_FILE=" + IS_FILE +
+                ", ABSOLUTE_PATH='" + ABSOLUTE_PATH + '\'' +
                 '}';
     }
 
@@ -53,12 +53,12 @@ public class SearchResult
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         SearchResult that = (SearchResult) o;
-        return isFile == that.isFile && Objects.equals(absolutePath, that.absolutePath);
+        return IS_FILE == that.IS_FILE && Objects.equals(ABSOLUTE_PATH, that.ABSOLUTE_PATH);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(isFile, absolutePath);
+        return Objects.hash(IS_FILE, ABSOLUTE_PATH);
     }
 
 

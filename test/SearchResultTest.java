@@ -32,7 +32,7 @@ class SearchResultTest {
     @Test
     void testConstructor() {
         assertEquals(true, result1.isFile());
-        assertEquals("Test", result1.getAbsolutePath());
+        assertEquals("Test", result1.getABSOLUTE_PATH());
     }
 
     @Test
