@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-//JUnit
 //Javadoc (javadoc already MOSTLY complete for controlpnl, filechooserlauncher, filedisplaypnl, and titlepnl)
 //UML
 
@@ -89,14 +88,14 @@ public class ListViewer
         frame.setVisible(true);
     }
 
-    private void reset()
+    public void reset()
     {
         controlPnl.reset();
         fileDisplayPnl.reset();
         controller.reset();
     }
 
-    private String formatSearchResult(ArrayList<SearchResult> results)
+    public String formatSearchResult(ArrayList<SearchResult> results)
     {
         //A StringBuilder is used here to avoid repeated String creation in the for loop
         StringBuilder text = new StringBuilder();
@@ -111,7 +110,7 @@ public class ListViewer
         return text.toString();
     }
 
-    private boolean displaySearchResult(ArrayList<SearchResult> results)
+    public boolean displaySearchResult(ArrayList<SearchResult> results)
     {
         String formatted = formatSearchResult(results);
 
@@ -172,5 +171,25 @@ public class ListViewer
     public void setUpQuitListener()
     {
         controlPnl.addQuitActionListener((ActionEvent ae) -> handleQuit());
+    }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public TitlePnl getTitlePnl() {
+        return titlePnl;
+    }
+
+    public ControlPnl getControlPnl() {
+        return controlPnl;
+    }
+
+    public FileDisplayPnl getFileDisplayPnl() {
+        return fileDisplayPnl;
+    }
+
+    public ListController getController() {
+        return controller;
     }
 }

@@ -25,4 +25,12 @@ public class ListController
     public void reset() {
         launcher.resetChooser();
     }
+
+    public RecursiveLister getLister() {
+        return lister;
+    }
+
+    public FileChooserLauncher getLauncher() {
+        return launcher;
+    }
 }

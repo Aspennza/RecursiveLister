@@ -116,4 +116,8 @@ public class ControlPnl extends JPanel
     public JButton getQuitBtn() {
         return quitBtn;
     }
+
+    public Font getControlPnlFont() {
+        return controlPnlFont;
+    }
 }

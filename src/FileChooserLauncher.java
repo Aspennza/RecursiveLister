@@ -10,11 +10,22 @@ import java.nio.file.Path;
  */
 public class FileChooserLauncher
 {
+    //NOTE: This class could not be JUnit tested, as it threw an IndexOutOfBoundsException
+    //whenever any of its methods were run in a headless environment (as a JFileChooser
+    //cannot successfully be created in a headless JUnit environment, according to my
+    //research). I attempted to refactor this class to be as compartmentalized as possible,
+    //but without using methods outside the scope of this course (i.e., object mocking,
+    //skipping the tests when in a headless environment, etc.), this class could not be tested.
+
     //This JFileChooser is used to prompt the user to pick a directory
     private JFileChooser chooser;
 
     private void setUpChooser() {
         chooser = new JFileChooser();
+        configureChooser(chooser);
+    }
+
+    public void configureChooser(JFileChooser chooser) {
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         File workingDirectory = new File(System.getProperty("user.dir"));
         chooser.setCurrentDirectory(workingDirectory);

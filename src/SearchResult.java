@@ -13,7 +13,7 @@ public class SearchResult
     public String display()
     {
         if (isFile) {
-            return "Found a file:" + absolutePath;
+            return "Found a file: " + absolutePath;
         } else {
             return "Found a directory: " + absolutePath;
         }
@@ -46,4 +46,6 @@ public class SearchResult
     public int hashCode() {
         return Objects.hash(isFile, absolutePath);
     }
+
+
 }
